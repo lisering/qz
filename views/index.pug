@@ -3,9 +3,11 @@ extends layout
 block content
   div.container
     h3.text-center= '联想阳光15周年庆'
+    form
+      input.form-control(type='text' placeholder='站点名称' name='state_search' id='state_search')
     ul.list-unstyled.statelist
       for state in states
-        li
+        li(id=state.stateName)
           div.title.clearfix
             div.pull-left
               span= state.areaName
@@ -24,12 +26,19 @@ block content
       var target = e.target,
           stateName = target.rel;
       if(stateName) {
-        $.getJSON('/vote/' + stateName, function(data) {
+        $.getJSON('/vote/' + stateName, {openid: location.search.slice(1).split('=')[1]} ,function(data) {
           if (data.state === 'success') {
             var votedom = $(target.closest('li')).find('.vote'),
               vote = parseInt(votedom.html(), 10) + 1;
             votedom.html(vote);
+          } else {
+            return alert(data.state);
           }
         });
+      }
+    });
+    $('#state_search').on('input', function(e) {
+        if(document.querySelector('#' + e.target.value)) {
+        document.querySelector('#' + e.target.value).scrollIntoView();
       }
     });

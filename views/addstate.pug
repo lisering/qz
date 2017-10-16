@@ -3,7 +3,7 @@ extends layout
 block content
   div.container
     h3.text-center= '增加站点'
-    form.container(action='/poststate' method='post' enctype="multipart/form-data")
+    form(action='/poststate' method='post' enctype="multipart/form-data")
       div.form-group
         label(for='areaname')= '站点所属区域'
         input.form-control#areaname(type='text' required name='areaname' placeholder='北京大区/北京一区')

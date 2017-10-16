@@ -10,6 +10,11 @@ var addstate = require('./routes/addstate');
 var poststate = require('./routes/poststate');
 var vote = require('./routes/vote');
 var list = require('./routes/list');
+var register = require('./routes/register');
+var login = require('./routes/login');
+var loginto = require('./routes/loginto');
+var postregister = require('./routes/postregister');
+var register = require('./routes/register');
 var users = require('./routes/users');
 
 var app = express();
@@ -31,6 +36,10 @@ app.use('/addstate', addstate);
 app.use('/poststate', poststate);
 app.use('/vote', vote);
 app.use('/list', list);
+app.use('/register', register);
+app.use('/login', login);
+app.use('/loginto', loginto);
+app.use('/postregister', postregister);
 app.use('/users', users);
 
 // catch 404 and forward to error handler

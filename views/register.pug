@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  div.container
+    h3.text-center= '15周年庆'
+    form(method='post' action='/postregister')
+      div.form-group
+        label(for='firstname')= 'first name'
+        input.form-control(type='text' placeholder='first name' required id='firstname' name='firstname')
+      div.form-group
+        label(for='lastname')= 'last name'
+        input.form-control(type='text' placeholder='last name' required id='lastname' name='lastname')
+      div.form-group
+        label(for='email')= 'email'
+        input.form-control(type='text' placeholder='email' required id='email' name='email')
+      div.form-group
+        label(for='password')= 'password'
+        input.form-control(type='password' placeholder='password' required id='password' name='password')
+      div.form-group
+        button.btn.btn-primary.btn-block.btn-lg= '注册用户'

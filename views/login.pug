@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  div.container
+    h3.text-center= '登录'
+    form(action='/loginto', method='post')
+      div.form-group
+        lable(for='email')= '登录邮箱'
+        input.form-control(type='email' required id='email' name='email' placeholder='some@some.com')
+      div.form-group
+        lable(for='password')= '登录密码'
+        input.form-control(type='password' required id='password' name='password' placeholder='登录密码')
+      div.form-group
+        button.btn.btn-primary.btn-block.btn-lg= '登录'
