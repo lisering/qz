@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  div.container
+    h3.text-center= '联想阳光15周年庆'
+    ul.list-unstyled.statelist
+      for state in states
+        li
+          div.title.clearfix
+            div.pull-left
+              span= state.areaName
+              span= '－'
+              span= state.stateName
+            div.pull-right= '票数：'
+              span.vote= state.stateVotes
+          div.posr
+            img.img-responsive(src=state.stateImg)
+            div.posa.btn.btn-success.btn-lg.votepos
+              a.glyphicon.glyphicon-thumbs-up.votebtn(href='javascript:;' rel=state.stateName)= '投票'
+          p.text-muted= state.stateDescription
+  script(type='text/javascript').
+    $('.votebtn').on('click', function(e) {
+      e.preventDefault();
+      var target = e.target,
+          stateName = target.rel;
+      if(stateName) {
+        $.getJSON('/vote/' + stateName, function(data) {
+          if (data.state === 'success') {
+            var votedom = $(target.closest('li')).find('.vote'),
+              vote = parseInt(votedom.html(), 10) + 1;
+            votedom.html(vote);
+          }
+        });
+      }
+    });

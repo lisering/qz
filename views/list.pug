@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  div.container
+    h3.text-center= '联想阳光15周年庆'
+    table.table
+      thead
+        tr
+          th= '站点名称'
+          th= '所属大区'
+          th= '票数'
+      tbody
+        for state in states
+          tr
+            td= state.stateName
+            td= state.areaName
+            td= state.stateVotes

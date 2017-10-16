@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  div.container
+    h3.text-center= '增加站点'
+    form.container(action='/poststate' method='post' enctype="multipart/form-data")
+      div.form-group
+        label(for='areaname')= '站点所属区域'
+        input.form-control#areaname(type='text' required name='areaname' placeholder='北京大区/北京一区')
+      div.form-group
+        label(for='statename')= '站点名称'
+        input.form-control#statename(type='text' required name='statename' placeholder='上地站')
+      div.form-group
+        label.file(for='stateimg')= '站点图片'
+          input.form-control#stateimg(type='file' required name='stateimg' accept="image/*")
+          span#filebtn.filebtn.form-control= '选择站点图片'
+      div.form-group
+        label(for='statedescription')= '站点描述'
+        textarea.form-control#statedescription(name='statedescription' required rows='6')
+      div.form-group
+        button.btn.btn-primary.btn-block.btn-lg= '增加'
+  script(type='text/javascript').
+    $('#stateimg').on('change', function(e) {
+      var _this = this;
+      if (_this.files.length) {
+        $('#filebtn').html(_this.files[0].name).addClass('black');
+      }
+    });
