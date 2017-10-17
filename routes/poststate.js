@@ -17,11 +17,6 @@ var db = require('../data/db');
 
 /* GET addstate page. */
 router.post('/', function(req, res, next) {
-  // let sql = 'INSERT INTO state VALUES()';
-  // let query = db.query(sql, (err, result) => {
-  //   res.render('addstate', { states: result });
-  // });
-  // res.send(req);
   upload(req, res, function(err) {
     if (err) {
       console.log(err);
@@ -35,13 +30,13 @@ router.post('/', function(req, res, next) {
         stateImg: file.path.replace('public/', ''),
         stateDescription: body.statedescription
       };
-      let sql = 'INSERT INTO state SET ?';
+      let sql = 'UPDATE state SET ? WHERE id="' + req.body.stateid + '"';
       let query = db.query(sql, stateData, (err, result) => {
+        console.log(sql);
         if (err) {
           console.log(err);
         }
-        console.log(result);
-        res.redirect('/');
+        res.redirect('/list');
       });
     }
   });

@@ -4,10 +4,16 @@ block content
   div.container
     h3.text-center= '联想阳光15周年庆'
     form
-      input.form-control(type='text' placeholder='站点名称' name='state_search' id='state_search')
-    ul.list-unstyled.statelist
+      div.form-group
+        select.form-control#area(name="area")
+          option(value='所有大区')= '所有大区'
+          for area in areas
+                option(value=area.areaName)= area.areaName
+      div.form-group
+        input.form-control(type='text' placeholder='站点名称' name='state_search' id='state_search')
+    ul.list-unstyled.statelist#statelist
       for state in states
-        li(id=state.stateName)
+        li
           div.title.clearfix
             div.pull-left
               span= state.areaName
@@ -21,7 +27,8 @@ block content
               a.glyphicon.glyphicon-thumbs-up.votebtn(href='javascript:;' rel=state.stateName)= '投票'
           p.text-muted= state.stateDescription
   script(type='text/javascript').
-    $('.votebtn').on('click', function(e) {
+    $('.votebtn').on('click', vote);
+    function vote(e) {
       e.preventDefault();
       var target = e.target,
           stateName = target.rel;
@@ -31,14 +38,33 @@ block content
             var votedom = $(target.closest('li')).find('.vote'),
               vote = parseInt(votedom.html(), 10) + 1;
             votedom.html(vote);
+            alert('您已经为“'+stateName+'”投票成功！');
           } else {
             return alert(data.state);
           }
         });
       }
+    }
+    function filterState(areaName, stateName) {
+      $.getJSON('/search', {areaname: areaName, statename: stateName} ,function(data) {
+        if (data.states !== 'failure') {
+          var str = '';
+          $.each(data, function(i, item) {
+            str+='<li><div class="title clearfix"><div class="pull-left"><span>' + item.areaName + '</span><span>－</span><span>' + item.stateName + '</span></div><div class="pull-right">票数：<span class="vote">' + item.stateVotes + '</span></div></div><div class="posr"><img class="img-responsive" src="' + item.stateImg + '"><div class="posa btn btn-success btn-lg votepos"><a class="glyphicon glyphicon-thumbs-up votebtn" href="javascript:;" rel="'+item.stateName+'">投票</a></div></div><p class="text-muted">' + item.stateDescription + '</p></li>';
+          });
+          $('.votebtn').off('click', vote);
+          $('#statelist').html(str);
+          $('.votebtn').on('click', vote);
+        }
+      });
+    }
+    $('#area').on('change', function(e) {
+      $('#state_search').val('');
+      filterState($(this).val(), '');
     });
+
     $('#state_search').on('input', function(e) {
-        if(document.querySelector('#' + e.target.value)) {
-        document.querySelector('#' + e.target.value).scrollIntoView();
-      }
+      var area = $('#area').val();
+      var state = $.trim($('#state_search').val());
+      filterState(area, state);
     });

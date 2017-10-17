@@ -15,6 +15,8 @@ var login = require('./routes/login');
 var loginto = require('./routes/loginto');
 var postregister = require('./routes/postregister');
 var register = require('./routes/register');
+var search = require('./routes/search');
+var order = require('./routes/order');
 var users = require('./routes/users');
 
 var app = express();
@@ -37,6 +39,8 @@ app.use('/poststate', poststate);
 app.use('/vote', vote);
 app.use('/list', list);
 app.use('/register', register);
+app.use('/search', search);
+app.use('/order', order);
 app.use('/login', login);
 app.use('/loginto', loginto);
 app.use('/postregister', postregister);

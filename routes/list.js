@@ -4,7 +4,7 @@ var db = require('../data/db');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  let sql = 'SELECT * FROM state order by recordTime DESC';
+  let sql = 'SELECT * FROM state order by stateImg ASC';
   let query = db.query(sql, (err, result) => {
     res.render('list', { states: result });
   });

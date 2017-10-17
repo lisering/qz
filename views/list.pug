@@ -2,16 +2,24 @@ extends layout
 
 block content
   div.container
-    h3.text-center= '联想阳光15周年庆'
+    h3.text-center= '联想阳光30周年庆'
     table.table
       thead
         tr
-          th= '站点名称'
           th= '所属大区'
+          th= '站点名称'
           th= '票数'
+          th.text-center= '图片'
       tbody
         for state in states
           tr
-            td= state.stateName
             td= state.areaName
+            td= state.stateName
             td= state.stateVotes
+            td.text-center
+              case state.stateImg
+                when null
+                  a.btn.btn-primary(href='/addstate?id=' + state.id + '&statename=' + state.stateName + '&areaname=' + state.areaName)= '增加图片'
+                default 
+                  a(href='/addstate?id=' + state.id + '&statename=' + state.stateName + '&areaname=' + state.areaName)
+                    img(src=state.stateImg width='30' height='30')

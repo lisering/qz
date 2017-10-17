@@ -65,3 +65,6 @@ input[type="file"] {
 .black {
   color: #000;
 }
+td,th {
+  white-space: nowrap;
+}
