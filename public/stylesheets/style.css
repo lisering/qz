@@ -77,7 +77,7 @@ th .order:link {
   text-decoration: none;
   color: #000;
 }
-th .order:active {
+th .order:visited {
   text-decoration: none;
   color: #000;
 }
@@ -85,10 +85,33 @@ th .order:hover {
   text-decoration: none;
   color: #000;
 }
-th .order:visited {
+th .order:active {
   text-decoration: none;
   color: #000;
 }
 .back {
   left: 0;
+}
+.ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 100px;
+}
+.inline-block {
+  display: inline-block;
+}
+.inline-block:link {
+  color: #000;
+}
+.inline-block:visited {
+  color: #000;
+  text-decoration: none;
+}
+.inline-block:hover {
+  color: #000;
+  text-decoration: none;
+}
+.inline-block:active {
+  color: #000;
+  text-decoration: none;
 }
