@@ -2,7 +2,9 @@ extends layout
 
 block content
   div.container
-    h3.text-center= '增加站点'
+    h3.posr.text-center= '增加站点'
+      a.posa.back.btn.btn-link(href='/list')= '返回列表'
+    hr
     form(action='/poststate' method='post' enctype="multipart/form-data")
       input(type='hidden' name='stateid' id='stateid' value=state.id)
       div.form-group

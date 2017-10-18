@@ -6,11 +6,15 @@ block content
     table.table
       thead
         tr
-          th= '所属大区'
-          th= '站点名称'
-          th= '票数'
-          th.text-center= '图片'
-      tbody
+          th
+            a.order(href='/order/areaName/desc')= '所属大区'
+          th
+            a.order(href='/order/stateName/desc')= '站点名称'
+          th
+            a.order(href='/order/stateVotes/desc')= '票数'
+          th.text-center
+            a.order(href='/order/stateImg/desc')= '图片'
+      tbody#tbody
         for state in states
           tr
             td= state.areaName
@@ -23,3 +27,32 @@ block content
                 default 
                   a(href='/addstate?id=' + state.id + '&statename=' + state.stateName + '&areaname=' + state.areaName)
                     img(src=state.stateImg width='30' height='30')
+  script(type='text/javascript').
+    $('.order').on('click', order);
+    function order(e) {
+      e.preventDefault();
+      var $this = $(this);
+      var href = $this.attr('href');
+      $.getJSON(href, function(data) {
+        var str = '';
+        $.each(data, function(i, item) {
+          var html = '';
+          if (item.stateImg) {
+            html = '<a href="/addstate?id='+item.id+'&statename='+item.stateName+'&areaname='+item.areaName+'"><img src="'+item.stateImg+'" width="30" height="30"></a>';
+          } else {
+            html = '<a class="btn btn-primary" href="/addstate?id='+item.id+'&statename='+item.stateName+'&areaname='+item.areaName+'">增加图片</a>';
+          }
+          str += '<tr><td>'+item.areaName+'</td>'+
+                     '<td>'+item.stateName+'</td>'+
+                     '<td>'+item.stateVotes+'</td>'+
+                     '<td class="text-center">'+ html +
+                     '</td></tr>';
+        });
+        $('#tbody').html(str);
+        if (href.indexOf('desc') !== -1) {
+          $this.attr('href', href.replace('desc', 'asc'));
+        } else {
+          $this.attr('href', href.replace('asc', 'desc'));
+        }
+      });
+    }
