@@ -1,0 +1,12 @@
+<h3 class="text-center">上传站点图片</h3>
+<hr>
+<form class="container" method="post" action="http://127.0.0.1:3000/upload" enctype="multipart/form-data">
+  <input type="hidden" name="id" value="{{params.id}}">
+  <div class="form-group">
+    <label for="file">
+      站点图片：
+    </label>
+    <input type="file" name="file" class="form-control" name="stateimg" accept="image/*">
+  </div>
+  <div class="form-group"><button class="btn btn-block btn-primary">提交图片</button></div>
+</form>

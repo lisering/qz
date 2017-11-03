@@ -1,0 +1,28 @@
+<h3 class="text-center">15周年庆投票信息</h3>
+<hr>
+<div class="container">
+  <app-search></app-search>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>序号</th>
+        <th>大区</th>
+        <th>站点</th>
+        <th>票数</th>
+        <th>图片</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let state of states">
+        <td>{{state.id}}</td>
+        <td>{{state.areaName}}</td>
+        <td>{{state.stateName}}</td>
+        <td>{{state.stateVotes}}</td>
+        <td>
+          <a href="a/{{state.id}}" *ngIf="state.stateImg"><img src="{{state.stateImg}}" witdh="50" height="50"></a>
+          <a href="a/{{state.id}}" *ngIf="!state.stateImg">暂无图片</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
