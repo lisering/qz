@@ -19,8 +19,8 @@
         <td>{{state.stateName}}</td>
         <td>{{state.stateVotes}}</td>
         <td>
-          <a href="a/{{state.id}}" *ngIf="state.stateImg"><img src="{{state.stateImg}}" witdh="50" height="50"></a>
-          <a href="a/{{state.id}}" *ngIf="!state.stateImg">暂无图片</a>
+          <a routerLink="{{state.id}}" *ngIf="state.stateImg"><img src="{{state.stateImg}}" witdh="50" height="50"></a>
+          <a routerLink="{{state.id}}" *ngIf="!state.stateImg">暂无图片</a>
         </td>
       </tr>
     </tbody>
